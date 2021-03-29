@@ -1,4 +1,6 @@
 !
+ip domain-name net.wwu.edu
+!
 service tcp-keepalives-in
 service tcp-keepalives-out
 service timestamps debug datetime msec localtime show-timezone
