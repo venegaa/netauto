@@ -24,17 +24,12 @@ ip ssh version 2
 !
 logging trap warnings
 logging host 140.160.244.170 transport udp port 2520
-snmp-server contact Enterprise Infra. Services, 360-650-3600
+snmp-server contact EIS, 360-650-3600
 snmp-server group ReadGrp v3 priv read ReadView
 snmp-server group SNMPMgmtGrp v3 priv read ReadView write WriteView
 snmp-server group SNMPMgmtGrp v3 auth context vlan- match prefix
 snmp-server view ReadView iso included
 snmp-server view WriteView iso included
-snmp-server system-shutdown
-snmp-server host 140.160.244.141 version 3 priv cpi
-spanning-tree mode rapid-pvst
-spanning-tree portfast edge bpduguard default
-spanning-tree extend system-id
 no ip http server
 no ip http secure-server
 !
