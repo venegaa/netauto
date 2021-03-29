@@ -1,0 +1,63 @@
+!
+aaa authentication login default group Admin_Access local
+aaa authentication login Console local
+aaa authentication login VTY_Access group Admin_Access local
+aaa authentication enable default group Admin_Access enable
+aaa authorization console
+aaa authorization config-commands
+aaa authorization exec default group Admin_Access local
+aaa authorization exec Console local
+aaa authorization commands 15 default group Admin_Access local
+aaa authorization commands 15 Console local
+aaa authorization commands 1 default group Admin_Access local
+aaa authorization commands 1 Console group Admin_Access local
+aaa accounting connection default
+aaa accounting network default
+aaa accounting system default
+aaa authentication dot1x default group RADIUS_Servers
+aaa authorization network default group RADIUS_Servers
+aaa authorization auth-proxy default group RADIUS_Servers
+aaa authorization configuration default group RADIUS_Servers
+aaa accounting update newinfo periodic 2880
+aaa accounting auth-proxy default start-stop group RADIUS_Servers
+aaa accounting dot1x default start-stop group RADIUS_Servers
+aaa accounting connection default start-stop group tacacs+
+aaa accounting exec default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+!
+aaa session-id common
+authentication mac-move permit
+tacacs server ISE1
+ address ipv4 10.247.110.24
+ key 7 15260309577A7E7D0F21300207554553520F7E5947470C1A
+tacacs server ISE2
+ address ipv4 10.247.110.25
+ key 7 02320C5E58565A786B5C0C391145415B5F5D0D2A303B312C
+!
+
+ip access-list extended dot1xMABRedirect
+ deny   ip any host 10.247.110.24
+ deny   ip any host 10.247.110.25
+ permit tcp any any eq 443
+ permit tcp any any eq www
+ip http server
+no ip http secure-server
+aaa group server radius RADIUS_Servers
+ server name ISE1
+server name ISE2
+aaa server radius dynamic-author
+ client 10.247.110.24 server-key 7 06250C225E1F044A5119163B190A7B382C25603B365227
+ client 10.247.110.25 server-key 7 06250C225E1F044A5119163B190A7B382C25603B365227
+dot1x system-auth-control
+dot1x guest-vlan supplicant
+ip device tracking
+radius-server vsa send accounting
+radius-server vsa send authentication
+radius server ISE1
+ address ipv4 10.247.110.24 auth-port 1812 acct-port 1813
+ key 7 047808051D70411D5D17012707055D1722267726277402
+!
+radius server ISE2
+ address ipv4 10.247.110.25 auth-port 1812 acct-port 1813
+ key 7 02320C5E58565A786B5C0C391145415B5F5D0D2A303B312C
