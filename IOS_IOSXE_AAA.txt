@@ -41,8 +41,6 @@ ip access-list extended dot1xMABRedirect
  deny   ip any host 10.247.110.25
  permit tcp any any eq 443
  permit tcp any any eq www
-ip http server
-no ip http secure-server
 aaa group server radius RADIUS_Servers
  server name ISE1
 server name ISE2
