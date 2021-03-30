@@ -1,0 +1,25 @@
+!
+ip access-list standard Admin_VTY_Access
+permit 140.160.54.31 log
+permit 140.160.244.141 log
+permit 10.47.11.0 0.0.0.255 log
+permit 10.47.10.0.0 0.0.0.255 log
+deny   any log
+!
+ip access-list extended FMLockGateways-IN
+permit ip 10.1.135.0 0.0.0.15 any log
+permit ip any 10.249.11.0 0.0.0.255 any log
+permit udp any host 140.160.242.13 eq domain
+permit udp any host 224.0.0.2 eq 1985
+permit udp any host 224.0.0.102 eq 1985
+permit udp any host 140.160.5.149 eq domain
+permit udp any host 140.160.244.135 eq bootpc
+permit udp any host 140.160.244.135 eq bootps
+permit udp any host 140.160.245.135 eq bootpc
+permit udp any host 140.160.245.135 eq bootps
+permit udp any host 255.255.255.255 eq bootps
+permit udp any host 140.160.5.149 eq ntp
+permit ip any host 140.160.249.87
+permit ip any host 140.160.248.25
+deny   ip any any
+!
