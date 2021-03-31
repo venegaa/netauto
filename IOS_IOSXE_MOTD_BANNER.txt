@@ -1,0 +1,15 @@
+banner motd #
+
+================================================
+UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+================================================
+You must have explicit permission to access or configure this device. All activities performed on this device may be logged, and violations of this policy may result in disciplinary action, and may be reported to law enforcement. 
+There is no right to privacy on this device. If you require access to this device, please contact WWU Enterprise Infrastructure Services.
+
+All activities performed on this device are logged and monitored.
+
+
+==========AUTHENTICATION SUCCESS==========
+Connected to $(hostname).$(domain) on line $(line).
+
+#
